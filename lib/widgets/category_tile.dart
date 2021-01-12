@@ -1,10 +1,10 @@
-import 'package:FlutterNewsApp/providers/article_model_provider.dart';
-import 'package:FlutterNewsApp/views/article_view.dart';
-import 'package:FlutterNewsApp/views/category_news_view.dart';
+import 'package:FlutterNewsApp/main.dart';
+import 'package:FlutterNewsApp/providers/news_model_provider.dart';
+import 'package:FlutterNewsApp/views/home.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 
 class CategoryTile extends StatelessWidget {
   final imageUrl, categoryName;
@@ -14,14 +14,16 @@ class CategoryTile extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     return GestureDetector(
-      onTap: () => Navigator.push(
-        context,
-        PageTransition(
-          duration: Duration(seconds: 2),
-          type: PageTransitionType.rightToLeft,
-          child: CategoryNewsView(),
-        ),
-      ),
+      onTap: () {
+        Provider.of<NewsModelProvider>(context, listen: false)
+            .getNews(category: categoryName);
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => Home(),
+        //   ),
+        // );
+      },
       child: Container(
         margin: EdgeInsets.only(right: 15),
         child: Stack(

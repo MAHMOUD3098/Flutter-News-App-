@@ -1,5 +1,4 @@
-import 'package:FlutterNewsApp/providers/article_model_provider.dart';
-import 'package:FlutterNewsApp/providers/category_model_provider.dart';
+import 'package:FlutterNewsApp/providers/news_model_provider.dart';
 import 'package:FlutterNewsApp/views/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,10 +14,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => ArticleModelProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => CategoryModelProvider(),
+          create: (context) => NewsModelProvider(),
         ),
       ],
       child: MaterialApp(

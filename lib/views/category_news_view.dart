@@ -1,4 +1,4 @@
-import 'package:FlutterNewsApp/providers/category_model_provider.dart';
+import 'package:FlutterNewsApp/providers/news_model_provider.dart';
 import 'package:FlutterNewsApp/widgets/blog_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,14 +13,14 @@ class _CategoryNewsViewState extends State<CategoryNewsView> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<CategoryModelProvider>(context, listen: false)
-          .getCategoryNews('health');
+      Provider.of<NewsModelProvider>(context, listen: false)
+          .getNews(category: 'health');
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<CategoryModelProvider>(
+    return Consumer<NewsModelProvider>(
       builder: (context, category, child) {
         return Scaffold(
           appBar: AppBar(
@@ -58,13 +58,13 @@ class _CategoryNewsViewState extends State<CategoryNewsView> {
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   primary: false,
-                  itemCount: category.categoryNews.length,
+                  itemCount: category.allNews.length,
                   itemBuilder: (context, index) {
                     return BlogTile(
-                      title: category.categoryNews[index].title,
-                      description: category.categoryNews[index].description,
-                      imgUrl: category.categoryNews[index].imgUrl,
-                      url: category.categoryNews[index].url,
+                      title: category.allNews[index].title,
+                      description: category.allNews[index].description,
+                      imgUrl: category.allNews[index].urlToImage,
+                      url: category.allNews[index].url,
                     );
                   },
                 ),
