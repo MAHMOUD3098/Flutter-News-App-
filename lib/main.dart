@@ -1,4 +1,4 @@
-import 'package:FlutterNewsApp/models/category_model.dart';
+import 'package:FlutterNewsApp/providers/article_model_provider.dart';
 import 'package:FlutterNewsApp/providers/category_model_provider.dart';
 import 'package:FlutterNewsApp/views/home.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +12,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => CategoryModelProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => ArticleModelProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CategoryModelProvider(),
+        ),
+      ],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
